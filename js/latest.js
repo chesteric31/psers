@@ -19,7 +19,7 @@
     .then(function(response) {
 
         container.querySelector('.first').innerHTML = 
-        "<img src='" + response.image.medium + "' />"
+        "<img src='" + response.image.medium.replace("http", "https") + "' />"
         +
         "<h4> Name: " + response._embedded.nextepisode.name + "</h4>"
         +
@@ -27,7 +27,7 @@
         +
         "<h4> Air stamp: " + (new Date(response._embedded.nextepisode.airstamp)).toUTCString() +  "</h4>"
         +
-        "<h4><a href='" + response._embedded.nextepisode.url + "'>Click me to see more!</a>"  + "</h4>"
+        "<h4><a href='" + response._embedded.nextepisode.url.replace("http", "https") + "'>Click me to see more!</a>"  + "</h4>"
         ;
 
 
