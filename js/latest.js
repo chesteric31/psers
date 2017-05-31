@@ -11,7 +11,7 @@
   // Get Commit Data from Github API
   function fetchCommits() {
     //var url = 'https://api.github.com/repos/unicodeveloper/resources-i-like/commits';
-    var url = 'http://api.tvmaze.com/shows/11?embed=nextepisode';
+    var url = 'https://api.tvmaze.com/shows/11?embed=nextepisode';
     fetch(url)
     .then(function(fetchResponse){ 
       return fetchResponse.json();
