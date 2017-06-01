@@ -56,7 +56,7 @@
         toast('Subscribed successfully.');
         console.info('Push notification subscribed.');
         console.log(subscription);
-        saveSubscriptionID(subscription);
+          saveSubscriptionID(subscription);
         changePushStatus(true);
       })
       .catch(function (error) {
@@ -131,7 +131,7 @@ function saveSubscriptionID(subscription) {
 
     console.log("Subscription ID", subscription_id);
 
-    fetch('http://localhost:3333/api/users', {
+    fetch('https://psers-api.herokuapp.com/api/users', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
@@ -144,7 +144,7 @@ function saveSubscriptionID(subscription) {
 function deleteSubscriptionID(subscription) {
     var subscription_id = subscription.endpoint.split('gcm/send/')[1];
 
-    fetch('http://localhost:3333/api/user/' + subscription_id, {
+    fetch('https://psers-api.herokuapp.com/api/user/' + subscription_id, {
       method: 'delete',
       headers: {
         'Accept': 'application/json',
