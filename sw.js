@@ -3,6 +3,8 @@ var cacheName = 'pwa-sers';
 var filesToCache = [
     './',
     './css/style.css',
+    './images/push-off.png',
+    './images/push-on.png',
     './images/icons/icon-72x72.png',
     './images/icons/icon-96x96.png',
     './images/icons/icon-128x128.png',
@@ -14,7 +16,8 @@ var filesToCache = [
     './js/app.js',
     './js/menu.js',
     './js/offline.js',
-    './js/toast.js'
+    './js/toast.js',
+    './js/notification.js'  
 ];
 
 // Install Service Worker
@@ -65,4 +68,34 @@ self.addEventListener('fetch', function(event) {
             return response || fetch(event.request);
         })
     );
+});
+
+self.addEventListener('push', function(event) {
+
+  console.info('Event: Push');
+
+  var title = 'New Update for PSERS';
+
+  var body = {
+    'body': 'Click to see the latest episodes',
+    'tag': 'psers',
+    'icon': './images/icons/icon-72x72.png'
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(title, body)
+  );
+});
+
+self.addEventListener('notificationclick', function(event) {
+
+  var url = './latest.html';
+
+  event.notification.close(); //Close the notification
+
+  // Open the app and navigate to latest.html after clicking the notification
+  event.waitUntil(
+    clients.openWindow(url)
+  );
+
 });
