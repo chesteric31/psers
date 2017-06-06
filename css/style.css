@@ -387,11 +387,11 @@ button:disabled {
 }
 
 .card__img {
-  width: 60px;
-  height: 60px;
+  width: 25%;
+  height: 25%;
   display: block;
   margin: 20px auto 10px;
-  border-radius: 50%;
+  //border-radius: 50%;
 }
 
 b {
