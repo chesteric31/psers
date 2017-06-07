@@ -2,6 +2,8 @@ var cacheName = 'pwa-sers';
 
 var filesToCache = [
     './',
+    './index.html',
+    './latest.html',
     './css/style.css',
     './images/push-off.png',
     './images/push-on.png',
@@ -13,6 +15,10 @@ var filesToCache = [
     './images/icons/icon-192x192.png',
     './images/icons/icon-384x384.png',
     './images/icons/icon-512x512.png',
+    './images/icons/apple-touch-icon.png',
+    './images/icons/favicon-16x16.png',
+    './images/icons/favicon-32x32.png',
+    './images/icons/favicon.ico, safari-pinned-tab.svg',
     './js/app.js',
     './js/menu.js',
     './js/offline.js',
