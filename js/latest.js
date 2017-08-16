@@ -8,48 +8,11 @@
   var container = document.querySelector('.container');
 
   function fetchLastEpisodes() {
-    var url = 'https://api.tvmaze.com/shows/11?embed=nextepisode';
-    fetch(url)
-    .then(function(fetchResponse){ 
-      return fetchResponse.json();
-    })
-    .then(function(response) {
-        container.querySelector('.first').innerHTML = buildHtml(response);
-
-
-        app.spinner.setAttribute('hidden', true); //hide spinner
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-    var url = 'https://api.tvmaze.com/shows/8167?embed=nextepisode';
-    fetch(url)
-    .then(function(fetchResponse){ 
-      return fetchResponse.json();
-    })
-    .then(function(response) {
-        container.querySelector('.second').innerHTML = buildHtml(response);
-
-
-        app.spinner.setAttribute('hidden', true); //hide spinner
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
-    var url = 'https://api.tvmaze.com/shows/170?embed=nextepisode';
-    fetch(url)
-    .then(function(fetchResponse){ 
-      return fetchResponse.json();
-    })
-    .then(function(response) {
-        container.querySelector('.third').innerHTML = buildHtml(response);
-
-
-        app.spinner.setAttribute('hidden', true); //hide spinner
-      })
-      .catch(function (error) {
-        console.error(error);
-      });
+    fetchEpisode(11, ".first");
+    fetchEpisode(8167, ".second");
+    fetchEpisode(170, ".third");
+    fetchEpisode(66, ".fourth");
+    fetchEpisode(5495, ".fifth");
   };
   function buildHtml ( response ) {
     var html = "<img class='card__img' src='" + response.image.original.replace("http", "https") + "' />";
@@ -66,6 +29,21 @@
           html += "No more episode for now";
         };
     return html;
+  }
+
+  function fetchEpisode ( id , className ) {
+    var url = 'https://api.tvmaze.com/shows/' + id + '?embed=nextepisode';
+    fetch(url)
+    .then(function(fetchResponse){ 
+      return fetchResponse.json();
+    })
+    .then(function(response) {
+        container.querySelector(className).innerHTML = buildHtml(response);
+        app.spinner.setAttribute('hidden', true); //hide spinner
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
   }
 
   fetchLastEpisodes();
