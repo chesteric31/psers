@@ -5,7 +5,7 @@ toolbox.router.get('/images*', toolbox.cacheFirst);
 
 toolbox.router.get('/', toolbox.cacheFirst, {
     cache: {
-        name: 'pwa-sers-cache';
+        name: 'pwa-sers-cache',
     }
 })
 
