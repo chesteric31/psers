@@ -1,31 +1,13 @@
-var cacheName = 'pwa-sers';
+importScripts('https://cdnjs.cloudflare.com/ajax/libs/sw-toolbox/3.6.1/sw-toolbox.js');
 
-var filesToCache = [
-    './',
-    './index.html',
-    './latest.html',
-    './css/style.css',
-    './images/push-off.png',
-    './images/push-on.png',
-    './images/icons/icon-72x72.png',
-    './images/icons/icon-96x96.png',
-    './images/icons/icon-128x128.png',
-    './images/icons/icon-144x144.png',
-    './images/icons/icon-152x152.png',
-    './images/icons/icon-192x192.png',
-    './images/icons/icon-384x384.png',
-    './images/icons/icon-512x512.png',
-    './images/icons/apple-touch-icon.png',
-    './images/icons/favicon-16x16.png',
-    './images/icons/favicon-32x32.png',
-    './images/icons/favicon.ico',
-    './images/icons/safari-pinned-tab.svg',
-    './js/app.js',
-    './js/menu.js',
-    './js/offline.js',
-    './js/toast.js',
-    './js/notification.js'  
-];
+toolbox.precache(['./css/style.css', './images/push-off.png', './images/push-on.png']);
+toolbox.router.get('/images*', toolbox.cacheFirst);
+
+toolbox.router.get('/', toolbox.cacheFirst, {
+    cache: {
+        name: 'pwa-sers-cache';
+    }
+})
 
 // Install Service Worker
 self.addEventListener('install', function(event) {
