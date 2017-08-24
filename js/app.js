@@ -30,10 +30,12 @@ if ('serviceWorker' in navigator) {
   }
   
   document.querySelector("#showToAdd").addEventListener('keyup', function () {
-    fetchShows();
+    if (document.querySelector('#showToAdd').value.length > 2) {
+      fetchShows();
+    }
   });
-  document.querySelector("#showToAdd").addEventListener('onchange', function () {
-    console.log('select');
+  document.querySelector("#showToAdd").addEventListener('input', function () {
+    console.log(document.querySelector('#showToAdd').value);
   });
 
 })();
