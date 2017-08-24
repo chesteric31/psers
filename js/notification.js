@@ -137,7 +137,7 @@ function saveSubscriptionID(subscription) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ user_id : subscription_id })
+      body: JSON.stringify({ user_id : subscription_id, watching_shows_tvmaze_ids : [1,2,3] })
     });
 }
 
