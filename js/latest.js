@@ -12,7 +12,7 @@
       .then(function(registration) {
         registration.pushManager.getSubscription().then(subscription => {
         console.log(subscription);
-        if (typeof subscription != 'undefined') {
+        if (typeof subscription != 'undefined' && subscription != null) {
           var subscription_id = subscription.endpoint.split('gcm/send/')[1];
           fetchShows(subscription_id);
         }
