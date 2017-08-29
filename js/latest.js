@@ -81,6 +81,7 @@
           return;
         }
         return subscription;
+      })});
   }
 
   fetchLastEpisodes();
