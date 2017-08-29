@@ -51,7 +51,7 @@
         console.log(response);
         if (response.success == true) {
           response.user.watching_shows_tvmaze_ids.forEach(function(show_id) {
-            fetchEpisode(show_id, "." + show_id);
+            fetchEpisode(show_id);
           });
         } else {
           alert('Error in fetch shows.');
@@ -63,14 +63,17 @@
       });
   }
 
-  function fetchEpisode ( id , className ) {
+  function fetchEpisode ( id ) {
     var url = 'https://api.tvmaze.com/shows/' + id + '?embed=nextepisode';
     fetch(url)
     .then(function(fetchResponse){ 
       return fetchResponse.json();
     })
     .then(function(response) {
-        container.querySelector(className).innerHTML = buildHtml(response);
+        var section = document.createElement("section");
+        section.className = "card";
+        section.innerHTML = buildHtml(response);
+        container.appendChild(section);
         app.spinner.setAttribute('hidden', true); //hide spinner
       })
       .catch(function (error) {
