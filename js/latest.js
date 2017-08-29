@@ -8,11 +8,18 @@
   var container = document.querySelector('.container');
 
   function fetchLastEpisodes() {
-    fetchEpisode(11, ".first");
-    fetchEpisode(8167, ".second");
+    var subscription = getSubscription();
+    if (subscription) {
+      var subscription_id = subscription.endpoint.split('gcm/send/')[1];
+      var shows_id = fetchShows(subscription_id);
+      shows_id.forEach(function(show_id) {
+        fetchEpisode(show_id, "." + show_id);   
+      })
+    }
+    /*fetchEpisode(8167, ".second");
     fetchEpisode(170, ".third");
     fetchEpisode(66, ".fourth");
-    fetchEpisode(5495, ".fifth");
+    fetchEpisode(5495, ".fifth");*/
   };
   function buildHtml ( response ) {
     var html = "<img class='card__img' src='" + response.image.original.replace("http", "https") + "' />";
@@ -31,6 +38,22 @@
     return html;
   }
 
+  function fetchShows ( subscription_id ) {
+    var url = 'https://psers-api.herokuapp.com/api/user' + subscription_id;
+    fetch(url)
+    .then(function(fetchResponse){ 
+      return fetchResponse.json();
+    })
+    .then(function(response) {
+        if (response.success == 'true') {
+          return response.user.watching_shows_tvmaze_ids;
+        }
+      })
+      .catch(function (error) {
+        console.error(error);
+      });
+  }
+
   function fetchEpisode ( id , className ) {
     var url = 'https://api.tvmaze.com/shows/' + id + '?embed=nextepisode';
     fetch(url)
@@ -44,6 +67,20 @@
       .catch(function (error) {
         console.error(error);
       });
+  }
+
+  function getSubscription() {
+    navigator.serviceWorker.ready
+    .then(function(registration) {
+      //Get `push subscription`
+      registration.pushManager.getSubscription()
+      .then(function (subscription) {
+        //If no `push subscription`, then return
+        if(!subscription) {
+          alert('Unable to find subscription.');
+          return;
+        }
+        return subscription;
   }
 
   fetchLastEpisodes();
