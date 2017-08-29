@@ -130,7 +130,7 @@ function saveSubscriptionID(subscription) {
     var subscription_id = subscription.endpoint.split('gcm/send/')[1];
 
     console.log("Subscription ID", subscription_id);
-
+    console.log($("option:selected").map(function(){ return this.value }).get().join(", "));
     fetch('https://psers-api.herokuapp.com/api/users', {
       method: 'post',
       headers: {

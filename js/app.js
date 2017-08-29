@@ -29,13 +29,35 @@ if ('serviceWorker' in navigator) {
       });
   }
   
-  document.querySelector("#showToAdd").addEventListener('keyup', function () {
+  /*document.querySelector("#showToAdd").addEventListener('keyup', function () {
     if (document.querySelector('#showToAdd').value.length > 2) {
       fetchShows();
     }
   });
   document.querySelector("#showToAdd").addEventListener('input', function () {
     console.log(document.querySelector('#showToAdd').value);
+  });*/
+  $("#shows").select2({
+    placeholder: 'Select a show',
+    allowClear: true,
+    selectOnClose: true,
+    minimumInputLength: 3,
+    multiple: true,
+    ajax: {
+      url: function (params) {
+        return "https://api.tvmaze.com/search/shows?q=" + params.term;
+      },
+      dataType: "json",
+      delay: 250,
+      processResults: function (data, params) {
+
+        return {
+            results: $.map(data, function(obj) {
+              return { id: obj.show.id, text: obj.show.name };
+          })
+        };
+      }
+    }
   });
 
 })();

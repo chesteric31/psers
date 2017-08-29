@@ -239,6 +239,13 @@ header {
   margin: 0 auto;
 }
 
+.select-show {
+  width: 100%;
+  max-width: 300px;
+  display: block;
+  margin: 0 auto;
+}
+
 .home-note {
   font-style: oblique;
   margin-top: 20px;
