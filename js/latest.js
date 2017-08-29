@@ -52,7 +52,7 @@
     })
     .then(function(response) {
         console.log(response);
-        if (response.success == 'true') {
+        if (response.success == true) {
           return response.user.watching_shows_tvmaze_ids;
         } else {
           alert('Error in fetch shows.');
