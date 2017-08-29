@@ -80,6 +80,7 @@
       //Get `push subscription`
       registration.pushManager.getSubscription()
       .then(function (subscription) {
+        console.log(subscription);
         //If no `push subscription`, then return
         if(!subscription) {
           alert('Unable to find subscription.');
