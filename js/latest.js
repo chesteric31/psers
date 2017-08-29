@@ -44,7 +44,7 @@
   }
 
   function fetchShows ( subscription_id ) {
-    var url = 'https://psers-api.herokuapp.com/api/user' + subscription_id;
+    var url = 'https://psers-api.herokuapp.com/api/user/' + subscription_id;
     fetch(url)
     .then(function(fetchResponse){ 
         console.log(fetchResponse);
