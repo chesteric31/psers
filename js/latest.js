@@ -9,11 +9,13 @@
 
   function fetchLastEpisodes() {
     var subscription = getSubscription();
-    var subscription_id = subscription.endpoint.split('gcm/send/')[1];
-    var shows_id = fetchShows(subscription_id);
-    shows_id.forEach(function(show_id) {
-      fetchEpisode(show_id, "." + show_id);   
-    });
+    if (typeof subscription != 'undefined') {
+      var subscription_id = subscription.endpoint.split('gcm/send/')[1];
+      var shows_id = fetchShows(subscription_id);
+      shows_id.forEach(function(show_id) {
+        fetchEpisode(show_id, "." + show_id);   
+      });
+    }
     /*fetchEpisode(8167, ".second");
     fetchEpisode(170, ".third");
     fetchEpisode(66, ".fourth");
@@ -85,7 +87,7 @@
         }
         return subscription;
       })});
-  }6
+  }
 
   fetchLastEpisodes();
 })();
