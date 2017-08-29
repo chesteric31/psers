@@ -14,7 +14,7 @@
       var shows_id = fetchShows(subscription_id);
       shows_id.forEach(function(show_id) {
         fetchEpisode(show_id, "." + show_id);   
-      })
+      });
     }
     /*fetchEpisode(8167, ".second");
     fetchEpisode(170, ".third");
