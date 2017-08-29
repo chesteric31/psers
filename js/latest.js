@@ -42,11 +42,16 @@
     var url = 'https://psers-api.herokuapp.com/api/user' + subscription_id;
     fetch(url)
     .then(function(fetchResponse){ 
+        console.log(fetchResponse);
       return fetchResponse.json();
     })
     .then(function(response) {
+        console.log(response);
         if (response.success == 'true') {
           return response.user.watching_shows_tvmaze_ids;
+        } else {
+          alert('Error in fetch shows.');
+          return;
         }
       })
       .catch(function (error) {
@@ -82,7 +87,7 @@
         }
         return subscription;
       })});
-  }
+  }6
 
   fetchLastEpisodes();
 })();
