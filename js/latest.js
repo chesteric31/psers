@@ -8,14 +8,16 @@
   var container = document.querySelector('.container');
 
   function fetchLastEpisodes() {
-    var subscription = getSubscription();
-    if (typeof subscription != 'undefined') {
-      var subscription_id = subscription.endpoint.split('gcm/send/')[1];
-      var shows_id = fetchShows(subscription_id);
-      shows_id.forEach(function(show_id) {
-        fetchEpisode(show_id, "." + show_id);   
-      });
-    }
+    self.registration.pushManager.getSubscription().then(subscription => {
+      console.log(subscription);
+      if (typeof subscription != 'undefined') {
+        var subscription_id = subscription.endpoint.split('gcm/send/')[1];
+        var shows_id = fetchShows(subscription_id);
+        shows_id.forEach(function(show_id) {
+          fetchEpisode(show_id, "." + show_id);   
+        });
+      }
+    });
     /*fetchEpisode(8167, ".second");
     fetchEpisode(170, ".third");
     fetchEpisode(66, ".fourth");
@@ -72,22 +74,6 @@
       .catch(function (error) {
         console.error(error);
       });
-  }
-
-  function getSubscription() {
-    navigator.serviceWorker.ready
-    .then(function(registration) {
-      //Get `push subscription`
-      registration.pushManager.getSubscription()
-      .then(function (subscription) {
-        console.log(subscription);
-        //If no `push subscription`, then return
-        if(!subscription) {
-          alert('Unable to find subscription.');
-          return;
-        }
-        return subscription;
-      })});
   }
 
   fetchLastEpisodes();
