@@ -14,10 +14,7 @@
         console.log(subscription);
         if (typeof subscription != 'undefined') {
           var subscription_id = subscription.endpoint.split('gcm/send/')[1];
-          var shows_id = fetchShows(subscription_id);
-          shows_id.forEach(function(show_id) {
-            fetchEpisode(show_id, "." + show_id);   
-          });
+          fetchShows(subscription_id);
         }
       })
     });
@@ -53,7 +50,9 @@
     .then(function(response) {
         console.log(response);
         if (response.success == true) {
-          return response.user.watching_shows_tvmaze_ids;
+          response.user.watching_shows_tvmaze_ids.forEach(function(show_id) {
+            fetchEpisode(show_id, "." + show_id);
+          });
         } else {
           alert('Error in fetch shows.');
           return;
