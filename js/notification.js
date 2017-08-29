@@ -41,7 +41,7 @@
 
   // Ask User if he/she wants to subscribe to push notifications and then 
   // ..subscribe and send push notification
-  function subscribePush() {
+  function subscribePush(shows_id) {
     navigator.serviceWorker.ready.then(function(registration) {
       if (!registration.pushManager) {
         alert('Your browser doesn\'t support push notification.');
@@ -56,7 +56,7 @@
         toast('Subscribed successfully.');
         console.info('Push notification subscribed.');
         console.log(subscription);
-          saveSubscriptionID(subscription);
+          saveSubscriptionID(subscription, shows_id);
         changePushStatus(true);
       })
       .catch(function (error) {
@@ -117,21 +117,20 @@
     var isSubscribed = (fabPushElement.dataset.checked === 'true');
     if (isSubscribed) {
       unsubscribePush();
-    }
-    else {
-      subscribePush();
+    } else {
+      var shows_id  = new Array();
+      $("option:selected").each(function() { shows_id.push($(this).val()); });
+      subscribePush(shows_id);
     }
   });
 
   isPushSupported(); //Check for push notification support
 })(window);
 
-function saveSubscriptionID(subscription) {
+function saveSubscriptionID(subscription, shows_id) {
     var subscription_id = subscription.endpoint.split('gcm/send/')[1];
 
     console.log("Subscription ID", subscription_id);
-    var shows_id  = new Array();
-    $("option:selected").each(function() { shows_id.push($(this).val()); });
     fetch('https://psers-api.herokuapp.com/api/users', {
       method: 'post',
       headers: {
