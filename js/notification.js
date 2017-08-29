@@ -130,14 +130,15 @@ function saveSubscriptionID(subscription) {
     var subscription_id = subscription.endpoint.split('gcm/send/')[1];
 
     console.log("Subscription ID", subscription_id);
-    console.log($("option:selected").map(function(){ return this.value }).get().join(", "));
+    var shows_id  = new Array();
+    $("option:selected").each(function() { shows_id.push($(this).val()); });
     fetch('https://psers-api.herokuapp.com/api/users', {
       method: 'post',
       headers: {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ user_id : subscription_id, watching_shows_tvmaze_ids : [1,2,3] })
+      body: JSON.stringify({ user_id : subscription_id, watching_shows_tvmaze_ids : shows_id })
     });
 }
 
