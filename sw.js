@@ -1,6 +1,6 @@
 importScripts('https://cdnjs.cloudflare.com/ajax/libs/sw-toolbox/3.6.1/sw-toolbox.js');
 
-toolbox.precache(['./css/style.css', './images/push-off.png', './images/push-on.png']);
+toolbox.precache(['index.html', './css/style.css', './images/push-off.png', './images/push-on.png']);
 toolbox.router.get('/images*', toolbox.cacheFirst);
 
 toolbox.router.get('/', toolbox.cacheFirst, {
