@@ -38,7 +38,7 @@ this.addEventListener('fetch', event => {
           })
     );
   }
-}
+});
 
 this.addEventListener('push', function(event) {
 
