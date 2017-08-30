@@ -38,8 +38,9 @@ this.addEventListener('fetch', event => {
           })
     );
   }
+}
 
-self.addEventListener('push', function(event) {
+this.addEventListener('push', function(event) {
 
   console.info('Event: Push');
 
@@ -56,7 +57,7 @@ self.addEventListener('push', function(event) {
   );
 });
 
-self.addEventListener('notificationclick', function(event) {
+this.addEventListener('notificationclick', function(event) {
 
   var url = './latest.html';
 
@@ -66,8 +67,8 @@ self.addEventListener('notificationclick', function(event) {
   event.waitUntil(
     clients.openWindow(url)
   );
-
 });
+
 function getFilenameFromUrl(path){
     path = path.substring(path.lastIndexOf("/")+ 1);
     return (path.match(/[^.]+(\.[^?#]+)?/) || [])[0];
