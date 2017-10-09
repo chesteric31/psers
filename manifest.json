@@ -1,11 +1,11 @@
 {
-  "name": "Simplied Episode Remainder System",
+  "name": "Simplified Episode Remainder System",
   "short_name": "PSERS",
   "theme_color": "#2196f3",
   "background_color": "#2196f3",
   "display": "standalone",
   "orientation": "portrait",
-  "start_url": ".",
+  "start_url": "/psers/index.html",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",

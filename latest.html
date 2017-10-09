@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html.g>
+<html>
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -10,6 +10,7 @@
   <meta name="msapplication-starturl" content="/">
   <title>PSERS - PWA Simplified Episode Remainder System</title>
   <link rel="stylesheet" type="text/css" href="css/style.css">
+  
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" sizes="180x180" href="images/icons/apple-touch-icon.png">
   <link rel="icon" type="image/png" sizes="32x32" href="images/icons/favicon-32x32.png">
@@ -43,22 +44,7 @@
 
 
 
-        <div class="container">
-            <section class="card first">
-
-            </section>
-            <section class="card second">
-
-            </section>
-            <section class="card third">
-
-            </section>
-            <section class="card fourth">
-
-            </section>
-            <section class="card fifth">
-
-            </section>
+        <div class="container" id="latestEpisodes">
         </div>
       </section>
 
@@ -72,12 +58,12 @@
       <div class="toast__container"></div>      
     </div>
 
-
-
-  <script src="./js/app.js"></script>
-  <script src="./js/latest.js"></script>
-  <script src="./js/toast.js"></script>
-  <script src="./js/offline.js"></script>
-  <script src="./js/menu.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js"></script>
+    <script src="./js/app.js"></script>
+    <script src="./js/latest.js"></script>
+    <script src="./js/toast.js"></script>
+    <script src="./js/offline.js"></script>
+    <script src="./js/menu.js"></script>
 </body>
 </html>
