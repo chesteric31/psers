@@ -44,8 +44,11 @@ this.addEventListener('push', function(event) {
 
   console.info(event);
 
-  var title = event.data.show_title;
-
+  var title = "Updates!";
+  if (event.data) {
+    title = event.data.show_title;
+  }
+  
   var body = {
     'body': 'Click to see the latest episodes',
     'tag': 'psers',
