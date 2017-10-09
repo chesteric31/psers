@@ -44,7 +44,7 @@ this.addEventListener('push', function(event) {
 
   console.info(event);
 
-  var title = 'New Update for PSERS';
+  var title = event.data.show_title;
 
   var body = {
     'body': 'Click to see the latest episodes',
