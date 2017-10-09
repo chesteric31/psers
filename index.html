@@ -16,6 +16,7 @@
   <link rel="icon" type="image/png" sizes="16x16" href="images/icons/favicon-16x16.png">
   <link rel="mask-icon" href="images/icons/safari-pinned-tab.svg" color="#2196f3">
 <!--[if IE]><link rel="shortcut icon" href="/images/icon/favicon.ico"><![endif]-->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.min.css" rel="stylesheet" />
 </head>
 <body>
     <div class="app app__layout">
@@ -46,8 +47,11 @@
           <p class="home-note">Latest Episodes on Series I like!</a></p>
         </section>
         <section class="section">
-          <input class="add__input" type="text" name="showToAdd" id="showToAdd" list="shows" placeholder="Show to add...">
-          <datalist id="shows"></datalist>
+          <section class="card_container">
+            <div class="container" id="shows">
+              <select id="selectShow" />
+            </div>
+          </section>
         </section>
 
 
@@ -66,5 +70,7 @@
     <script src="./js/offline.js"></script>
     <script src="./js/menu.js"></script>
     <script src="./js/notification.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" /> 
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js" />
 </body>
 </html>

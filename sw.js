@@ -11,7 +11,7 @@ toolbox.router.get('/', toolbox.cacheFirst, {
 
 self.addEventListener('push', function(event) {
 
-  console.info('Event: Push');
+  console.info('Event: Push: ' + event);
 
   var title = 'New Update for PSERS';
 

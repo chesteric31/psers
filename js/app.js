@@ -6,8 +6,8 @@ if ('serviceWorker' in navigator) {
 (function() {
   'use strict';
 
-  function fetchShows() {
-    var url = 'https://api.tvmaze.com/search/shows?q=' + document.querySelector('#showToAdd').value;
+  function fetchShows(event) {
+    var url = 'https://api.tvmaze.com/search/shows?q=' + event.target.value;
     fetch(url)
     .then(function(fetchResponse){ 
       return fetchResponse.json();
@@ -17,25 +17,55 @@ if ('serviceWorker' in navigator) {
     	Array.prototype.forEach.call( options, function( node ) {
     		node.parentNode.removeChild( node );
 		});
-	    response.forEach(function(item) {
-	    	var option = document.createElement('option');
-	        option.label = item.show.name;
-	        option.value = item.show.id;
-	        shows.appendChild(option);
+	    response.forEach(function(response) {
+
+	    	var option = document.createElement("section");
+        option.class = "card";
+        option.innerHTML = response.show.name + "<img class='card__img' src='" + response.show.image.medium.replace("http", "https") + "' />"
+	        console.log(response.show.name);
+	        document.querySelector("#shows").appendChild(option);
 	    });
       })
       .catch(function (error) {
         console.error(error);
       });
   }
-  
-  document.querySelector("#showToAdd").addEventListener('keyup', function () {
-    if (document.querySelector('#showToAdd').value.length > 2) {
-      fetchShows();
-    }
-  });
-  document.querySelector("#showToAdd").addEventListener('input', function () {
-    console.log(document.querySelector('#showToAdd').value);
-  });
+
+  document.addEventListener("DOMContentLoad", onReady, false);
+
+  function onReady() {
+    $("#selectShow").select2({
+  ajax: {
+    url: "https://api.tvmaze.com/search/shows?q=",
+    dataType: 'json',
+    delay: 250,
+    data: function (params) {
+      return {
+        q: params.term, // search term
+        page: params.page
+      };
+    },
+    processResults: function (data, params) {
+      // parse the results into the format expected by Select2
+      // since we are using custom formatting functions we do not need to
+      // alter the remote JSON data, except to indicate that infinite
+      // scrolling can be used
+      params.page = params.page || 1;
+
+      return {
+        results: data.items,
+        pagination: {
+          more: (params.page * 30) < data.total_count
+        }
+      };
+    },
+    cache: true
+  },
+  escapeMarkup: function (markup) { return markup; }, // let our custom formatter work
+  minimumInputLength: 1,
+  templateResult: formatRepo, // omitted for brevity, see the source of this page
+  templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+});
+  }
 
 })();
