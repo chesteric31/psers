@@ -56,7 +56,7 @@ this.addEventListener('push', function(event) {
   };
 
   event.waitUntil(
-    self.registration.showNotification(event, body)
+    self.registration.showNotification(title, body)
   );
 });
 
