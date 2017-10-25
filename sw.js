@@ -45,8 +45,8 @@ this.addEventListener('push', function(event) {
   console.info(event);
 
   var title = "Updates!";
-  if (event.notification) {
-    title = event.notification.show_title;
+  if (event.data) {
+    title = event.data.json().title;
   }
   
   var body = {
