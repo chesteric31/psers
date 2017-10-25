@@ -45,8 +45,8 @@ this.addEventListener('push', function(event) {
   console.info(event);
 
   var title = "Updates!";
-  if (event.data) {
-    title = event.data.show_title;
+  if (event.notification) {
+    title = event.notification.show_title;
   }
   
   var body = {
@@ -56,7 +56,7 @@ this.addEventListener('push', function(event) {
   };
 
   event.waitUntil(
-    self.registration.showNotification(title, body)
+    self.registration.showNotification(event, body)
   );
 });
 
