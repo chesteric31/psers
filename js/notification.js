@@ -5,6 +5,8 @@
   var fabPushElement = document.querySelector('.fab__push');
   var fabPushImgElement = document.querySelector('.fab__image');
 
+  var push_publicKey = "BOXYzgIFRIxFktv3KtQVF5euGjSGcqeSuKt5G2FpRPX-xrmRujF7BFaa4GzL11OdDjdtsKSEN8D-Pz2QXFMfl20";
+
   //To check `push notification` is supported or not
   function isPushSupported() {
     //To check `push notification` permission is denied by user
@@ -50,7 +52,9 @@
 
       //To subscribe `push notification` from push manager
       registration.pushManager.subscribe({
-        userVisibleOnly: true //Always show notification when received
+        userVisibleOnly: true, //Always show notification when received
+        applicationServerKey: urlB64ToUint8Array(push_publicKey)
+
       })
       .then(function (subscription) {
         toast('Subscribed successfully.');
@@ -151,4 +155,18 @@ function deleteSubscriptionID(subscription) {
         'Content-Type': 'application/json'
       }
     });
+}
+function urlB64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - base64String.length % 4) % 4);
+  const base64 = (base64String + padding)
+    .replace(/\-/g, '+')
+    .replace(/_/g, '/');
+
+  const rawData = window.atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+
+  for (let i = 0; i < rawData.length; ++i) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
 }

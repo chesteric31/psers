@@ -76,3 +76,4 @@ function getFilenameFromUrl(path){
     path = path.substring(path.lastIndexOf("/")+ 1);
     return (path.match(/[^.]+(\.[^?#]+)?/) || [])[0];
 }
+
