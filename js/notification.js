@@ -61,15 +61,6 @@ var authSecret;
         console.log(subscription);
         saveSubscriptionID(subscription, shows_id);
         changePushStatus(true);
-        var rawKey = subscription.getKey ? subscription.getKey('p256dh') : '';
-        key = rawKey ?
-            btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) :
-            '';
-        var rawAuthSecret = subscription.getKey ? subscription.getKey('auth') : '';
-        authSecret = rawAuthSecret ?
-            btoa(String.fromCharCode.apply(null, new Uint8Array(rawAuthSecret))) :
-            '';
-        endpoint = subscription.endpoint;
       })
       .catch(function (error) {
         changePushStatus(false);
@@ -141,8 +132,18 @@ var authSecret;
 
 function saveSubscriptionID(subscription, shows_id) {
     var subscription_id = subscription.endpoint.split('gcm/send/')[1];
-
+    var rawKey = subscription.getKey ? subscription.getKey('p256dh') : '';
+    key = rawKey ?
+        btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) :
+        '';
+    var rawAuthSecret = subscription.getKey ? subscription.getKey('auth') : '';
+    authSecret = rawAuthSecret ?
+        btoa(String.fromCharCode.apply(null, new Uint8Array(rawAuthSecret))) :
+        '';
+    endpoint = subscription.endpoint;
     console.log("Subscription ID", subscription_id);
+    console.log("Key", key);
+    console.log("Authsecret", authSecret);
     fetch('https://psers-api.herokuapp.com/api/users', {
       method: 'post',
       headers: {
