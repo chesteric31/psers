@@ -43,7 +43,9 @@ this.addEventListener('push', function(event) {
     'icon': './images/icons/icon-72x72.png'
   };
 
-  event.waitUntil(
+  console.info(title);
+
+  cd
     self.registration.showNotification(title, body)
   );
 });
