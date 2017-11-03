@@ -17,15 +17,6 @@
   global.addEventListener('install', event => event.waitUntil(global.skipWaiting()));
   global.addEventListener('activate', event => event.waitUntil(global.clients.claim()));
 })(self);
-/*self.toolbox.router.get('/(.*)', function(req, vals, opts) {
-  return toolbox.networkFirst(req, vals, opts)
-    .catch(function(error) {
-      if (req.method === 'GET' && req.headers.get('accept').includes('text/html')) {
-        return toolbox.cacheOnly(new Request('/index.html'), vals, opts);
-      }
-      throw error;
-    });
-});*/
 this.addEventListener('fetch', event => {
   // request.mode = navigate isn't supported in all browsers
   // so include a check for Accept: text/html header.
