@@ -44,10 +44,7 @@ this.addEventListener('push', function(event) {
 
   console.info(event);
 
-  var title = "Updates!";
-  if (event.data) {
-    title = event.data.json().title;
-  }
+  var title = event.data ? event.data.text() : 'Updates';
   
   var body = {
     'body': 'Click to see the latest episodes',

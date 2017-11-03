@@ -1,3 +1,7 @@
+var endpoint;
+var key;
+var authSecret;
+
 (function (window) {
   'use strict';
 
@@ -28,8 +32,7 @@
           //If already access granted, enable push button status
           if (subscription) {
             changePushStatus(true);
-          }
-          else {
+          } else {
             changePushStatus(false);
           }
         })
@@ -56,8 +59,17 @@
         toast('Subscribed successfully.');
         console.info('Push notification subscribed.');
         console.log(subscription);
-          saveSubscriptionID(subscription, shows_id);
+        saveSubscriptionID(subscription, shows_id);
         changePushStatus(true);
+        var rawKey = subscription.getKey ? subscription.getKey('p256dh') : '';
+        key = rawKey ?
+            btoa(String.fromCharCode.apply(null, new Uint8Array(rawKey))) :
+            '';
+        var rawAuthSecret = subscription.getKey ? subscription.getKey('auth') : '';
+        authSecret = rawAuthSecret ?
+            btoa(String.fromCharCode.apply(null, new Uint8Array(rawAuthSecret))) :
+            '';
+        endpoint = subscription.endpoint;
       })
       .catch(function (error) {
         changePushStatus(false);
@@ -137,7 +149,13 @@ function saveSubscriptionID(subscription, shows_id) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({ user_id : subscription_id, watching_shows_tvmaze_ids : shows_id })
+      body: JSON.stringify({
+            user_id : subscription_id,
+            watching_shows_tvmaze_ids : shows_id,
+            endpoint: subscription.endpoint,
+            key: key,
+            authSecret: authSecret
+        })
     });
 }
 
