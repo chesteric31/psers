@@ -45,7 +45,7 @@ this.addEventListener('push', function(event) {
 
   console.info(title);
 
-  cd
+  event.waitUntil(
     self.registration.showNotification(title, body)
   );
 });
