@@ -45,9 +45,9 @@ this.addEventListener('push', function(event) {
 
   console.info(title);
 
-  //event.waitUntil(
-    self.registration.showNotification(title, body);
-  //);
+  event.waitUntil(
+    self.registration.showNotification(title, body)
+  );
 });
 
 this.addEventListener('notificationclick', function(event) {
